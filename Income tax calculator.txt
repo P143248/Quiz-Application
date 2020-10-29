@@ -1,0 +1,113 @@
+from tkinter import *
+
+root = Tk()
+root.configure(background="cadet blue")
+root.title("Icome tax Calculation System")
+root.geometry('1350x750+0+0')
+
+def ok():
+    
+    age = int(e2.get())
+    result = float(e3.get())
+    
+    
+    
+#According to their age,resident individual taxpayers are divided into three categories:
+
+
+#1) Resident individuals below the age of 60 years
+
+    if (age<=60):
+        if (result <= 250000):
+            tax= 0
+        if (result >= 250001):
+            tax= result * 5/100
+        if (result >= 500001):
+            tax= result * 20/100
+        if (result >= 1000001):
+            tax= result * 30/100
+    
+    
+#2) Resident senior citizens above 60 years but below 80 years
+
+    if (age>=61 and age<80):
+        if (result <= 300000):
+            tax= 0
+        if (result >= 300001):
+            tax= result * 5/100
+        if (result >= 500001):
+            tax= result * 20/100
+        if (result >= 1000001):
+            tax= result * 30/100
+            
+            
+#3) Resident super senior citizens above the age of 80 years             
+    if (age>=80):
+        if (result <= 500000):
+            tax= 0
+        if (result >= 500001):
+            tax= result * 20/100
+        if (result >= 1000001):
+            tax= result * 30/100
+            
+            
+            
+#surcharges to be levied for FY 2019-2020 and FY 2020-2021            
+            
+    if (result >= 5000000 and result <= 10000000):
+        tax= result * 10/100
+    elif (result >=10000001 and result <= 20000000):
+        tax= result * 15/100
+    elif (result >=20000001 and result <= 50000000):
+        tax= result * 25/100
+    elif (result >= 50000001):
+        tax= result * 37/100
+
+    
+                             
+                    
+  
+    taxText.set(tax)
+
+    nsal =  result - tax
+    nsalText.set(nsal)
+
+
+
+global e1
+global e2
+global e3
+
+global taxText
+global nsalText
+
+
+taxText = StringVar()
+nsalText = StringVar()
+
+Label(root, text="Name",background="orange red",foreground="white",width=12,height=2).place(x=500, y=190)
+Label(root, text="Age",background="orange red",foreground="white",width=12,height=2).place(x=500, y=250)
+Label(root, text="Salary",background="orange red",foreground="white",width=12,height=2).place(x=500, y=310)
+Label(root, text="Tax",background="orange red",foreground="white",width=12,height=2).place(x=500, y=370)
+Label(root, text="Total:",background="orange red",foreground="white",width=12,height=2).place(x=500, y=490)
+
+e1= Entry(root,background="orange",foreground="black")
+e1.place(x=650, y=195)
+
+e2 = Entry(root,background="white",foreground="blue")
+e2.place(x=650, y=255)
+
+e3 = Entry(root,background="green",foreground="white")
+e3.place(x=650, y=315)
+
+
+tax = Label(root, text="", textvariable=taxText).place(x=655, y=370)
+nsal = Label(root, text="", textvariable=nsalText).place(x=655, y=490)
+
+Button(root, text="Calculate", background="silver", command=ok ,height = 2, width = 25).place(x=500, y=430)
+exitButton=Button(root, text="EXIT", background="gold", command=root.destroy ,height = 1, width = 15).place(x=600, y=620)
+empname = Entry(root)
+empsal = Entry(root)
+
+root.mainloop()
+
